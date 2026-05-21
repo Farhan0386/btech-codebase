@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  const q = [
+    { p:"What is the capital of india", a:"delhi"},
+    { p:"Who is prime minister of india", a:"narender modi"},
+    { p:"Who is cmd of haryana", a:"nayab saini"},
+    { p:"Who is the first person to walk on the moon?", a:"Neil Armstrong"},
+    { p:"Which language is primarily used for web development?", a:"JavaScript"}
+];
+
+function r() {
+    let s = 0;
+    for (let i = 0; i < q.length; i++) {
+        let u = prompt(q[i].p);
+        if (u === null) {
+            alert("Quiz cancelled. Goodbye!");
+            return;
+        }
+        const nU = u.toLowerCase().trim();
+        const nA = q[i].a.toLowerCase().trim();
+
+        if (nU === nA) {
+            alert("Correct! ");
+            s++;
+        } else {
+            alert(`Wrong! The correct answer is: ${q[i].a}`);
+        }
+    }
+    alert(`Quiz Over! Your final score is ${s} out of ${q.length}.`);
+}
+
+r();
+    </script>
+</body>
+</html>
