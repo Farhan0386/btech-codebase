@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import Header from './components/Header';
+import StudentTable from './components/StudentTable';
+import AddStudentForm from './components/AddStudentForm';
+import './index.css';
+
+function App() {
+  const [students, setStudents] = useState([
+    { id: 1, name: "Avijit", score: 85 },
+    { id: 2, name: "Farhan", score: 38 },
+    { id: 3, name: "Rahul", score: 92 },
+    { id: 4, name: "Kartik", score: 78 },
+    { id: 5, name: "Priya", score: 65 },
+  ]);
+
+  const addStudent = (name, score) => {
+    const newStudent = {
+      id: students.length + 1,
+      name: name,
+      score: score
+    };
+    setStudents([...students, newStudent]);
+  };
+
+  const updateScore = (id, newScore) => {
+    setStudents(students.map(student => 
+      student.id === id ? { ...student, score: newScore } : student
+    ));
+  };
+
+  return (
+    <div className="container">
+      <Header />
+      <AddStudentForm onAddStudent={addStudent} />
+      <StudentTable students={students} onUpdateScore={updateScore} />
+    </div>
+  );
+}
+
+export default App;
