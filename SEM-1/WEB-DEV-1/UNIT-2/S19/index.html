@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 19: CSS Grid Basics</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; margin-top: 40px; }
+        .concept-box { background: white; padding: 20px; border: 1px solid #ccc; margin-bottom: 20px; border-radius: 8px; }
+        
+        /* Shared Item Styles for Visibility */
+        .grid-item {
+            background-color: lightblue;
+            border: 2px solid steelblue;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           TOPIC 1: GRID CONTAINER (Slides 6-9)
+           "Turn on the Engine"
+           ========================================= */
+        .grid-container-basic {
+            /* STEP 1: This makes the direct children "Grid Items" */
+            display: grid; 
+            
+            border: 2px dashed black;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        /* =========================================
+           TOPIC 2: DEFINING COLUMNS (Slides 11-16)
+           "grid-template-columns"
+           ========================================= */
+        
+        /* A. Fixed Widths (Slide 11) */
+        .cols-fixed {
+            display: grid;
+            /* Creates 3 columns with exact pixel sizes */
+            grid-template-columns: 100px 150px 200px; 
+            gap: 10px;
+        }
+
+        /* B. Fractions (fr) (Slide 13) - RESPONSIVE! */
+        .cols-fraction {
+            display: grid;
+            /* 1fr = 1 part of available space.
+               3 columns of equal width. */
+            grid-template-columns: 1fr 1fr 1fr; 
+            gap: 10px;
+        }
+
+        /* C. Repeat Function (Slide 15) - CLEANER CODE */
+        .cols-repeat {
+            display: grid;
+            /* Exactly the same as writing "1fr 1fr 1fr" */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+        }
+
+        /* =========================================
+           TOPIC 3: DEFINING ROWS (Slide 17)
+           "grid-template-rows"
+           ========================================= */
+        .rows-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns */
+            
+            /* Defines height of first 2 rows. 
+               3rd row will auto-size if it exists. */
+            grid-template-rows: 100px 50px; 
+            
+            gap: 10px;
+            height: 200px; /* Constraining height to see the effect */
+            border: 1px solid #999;
+        
+        }
+
+        /* =========================================
+           TOPIC 4: GAP (Slides 19-21)
+           Spacing between cells (Gutters)
+           ========================================= */
+        .gap-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            
+            /* Adds space between columns AND rows */
+            gap: 20px; 
+            
+            /* You can also specify separately:
+               row-gap: 20px;
+               column-gap: 50px; 
+            */
+        }
+
+        /* =========================================
+           CODING QUESTION (Slide 23)
+           "Simple 3-Column Grid"
+           ========================================= */
+        .exam-solution-container {
+            display: grid;
+            
+            /* "Define three equal-width columns" */
+            grid-template-columns: 1fr 1fr 1fr; 
+            
+            /* "Gap between items" (Slide 23 implies gap) */
+            gap: 10px;
+            
+            border: 2px solid black;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .exam-solution-item {
+            background-color: lightcoral;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid red;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 19: CSS Grid Part I</h1>
+
+    <!-- CONCEPT: CHESSBOARD ANALOGY -->
+    <div class="concept-box">
+        <h3>The Chessboard Analogy (Slide 4)</h3>
+        <p>
+            Flexbox is like a string of pearls (1D). CSS Grid is like a <strong>Chessboard</strong> (2D).
+            We define vertical lines (columns) and horizontal lines (rows) to create "Cells" where we place content.
+        </p>
+    </div>
+
+    <!-- TOPIC 1 & 2: COLUMNS -->
+    <div class="concept-box">
+        <h2>1. Defining Columns</h2>
+        
+        <p><strong>A. Fixed Widths (100px 150px 200px)</strong></p>
+        <div class="cols-fixed">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+        </div>
+
+        <p><strong>B. The `fr` Unit (1fr 1fr 1fr)</strong> - Resizes with screen!</p>
+        <div class="cols-fraction">
+            <div class="grid-item">1</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+        </div>
+    </div>
+
+    <!-- TOPIC 3: ROWS -->
+    <div class="concept-box">
+        <h2>2. Defining Rows</h2>
+        <p>Row 1 is 100px tall. Row 2 is 50px tall.</p>
+        <div class="rows-demo">
+            <div class="grid-item" style="background: orange;">Row 1</div>
+            <div class="grid-item" style="background: orange;">Row 1</div>
+            <div class="grid-item" style="background: yellow;">Row 2</div>
+            <div class="grid-item" style="background: yellow;">Row 2</div>
+        </div>
+    </div>
+
+    <!-- CODING QUESTION -->
+    <div class="concept-box">
+        <h2>3. Exam Solution (Slide 23)</h2>
+        <p><strong>Task:</strong> Create a 3-column grid with equal widths and a gap.</p>
+        
+        <div class="exam-solution-container">
+            <div class="exam-solution-item">Item 1</div>
+            <div class="exam-solution-item">Item 2</div>
+            <div class="exam-solution-item">Item 3</div>
+            <!-- Adding more to show the grid structure -->
+            <div class="exam-solution-item">Item 4</div>
+            <div class="exam-solution-item">Item 5</div>
+            <div class="exam-solution-item">Item 6</div>
+        </div>
+    </div>
+
+</body>
+</html>

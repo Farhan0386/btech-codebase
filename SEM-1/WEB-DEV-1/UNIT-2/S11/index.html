@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- 
+    HTML (HyperText Markup Language) is the skeleton of your web page. 
+    It defines the structure, like headings, paragraphs, and divisions.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 11: CSS Selectors Prep</title>
+
+    <!-- 
+        CSS (Cascading Style Sheets) goes inside the <style> tag when using Internal CSS.
+        CSS handles the "Look and Feel" (Color, Size, Layout).
+        
+        In this section, we define the RULES for how elements below should look.
+    -->
+    <style>
+        /* TOPIC 1: BASIC SELECTORS 
+           Selectors tell the browser WHICH HTML element we want to style.
+           Properties tell the browser WHAT style to apply (color, size, etc).
+        */
+
+        /* 1. TYPE SELECTOR (Tag Selector)
+           TARGET: All elements of a specific type (e.g., all <p> tags).
+           ANALOGY: "All soldiers wearing the same uniform."
+           WHY WE USE IT: To give a general style to all text or headings.
+        */
+        p {
+            /* 'color' is the Property. 'blue' is the Value. */
+            color: blue; 
+            /* This comment means: Every <p> tag on this page will have blue text. */
+        }
+
+        /* 2. CLASS SELECTOR
+           TARGET: Elements with a specific class attribute (e.g., class="highlight").
+           SYMBOL: Starts with a dot (.) followed by the class name.
+           ANALOGY: "A special squad with unique badges."
+           WHY WE USE IT: When we want to style a GROUP of elements differently from the rest.
+           NOTE: Multiple elements can share the same class.
+        */
+        .highlight {
+            background-color: yellow;
+            /* Only elements with class="highlight" will get this yellow background. */
+        }
+
+        /* 3. ID SELECTOR
+           TARGET: A single, unique element with a specific id attribute (e.g., id="footer").
+           SYMBOL: Starts with a hash (#) followed by the ID name.
+           ANALOGY: "One specific soldier (The Leader)."
+           WHY WE USE IT: For unique sections that appear only once, like a Header or Footer.
+           NOTE: An ID must be unique per page (only one element can have id="footer").
+        */
+        #footer {
+            font-weight: bold;
+            border: 2px solid black; /* Added a border so you can see the box clearly */
+            padding: 10px;           /* Adds space inside the box */
+        }
+
+        /* This style below is just to make this study guide look nice 
+           and is not part of the exam core questions, but good to know! 
+        */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .concept-box {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #2c3e50;
+        }
+        code {
+            background-color: #e0e0e0;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        The <body> contains everything visible on the website.
+    -->
+
+    <h1>End Term Exam Prep: Lecture 11</h1>
+    <p>This document covers CSS Selectors based on the K.R. Mangalam University slides.</p>
+
+    <!-- Concept Explanation Section -->
+    <div class="concept-box">
+        <h2>The CSS Sniper Analogy</h2>
+        <p>Your lecture uses a military analogy to explain selectors:</p>
+        <ul>
+            <li><strong>Type Selector (p):</strong> Targets <em>all soldiers</em> (all paragraphs).</li>
+            <li><strong>Class Selector (.hero):</strong> Targets a <em>special squad</em> (specific group).</li>
+            <li><strong>ID Selector (#leader):</strong> Targets <em>one specific commander</em> (unique element).</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- 
+       PRACTICAL EXAMPLES (From Slide 12 & 13)
+       This section demonstrates the code requested in the "Coding Questions" slide.
+    -->
+
+    <h2>Practical Output (From Slide 13)</h2>
+    
+    <!-- 
+        Example of Type Selector:
+        These <p> tags don't have classes or IDs. 
+        They turn BLUE because of the `p { color: blue; }` rule in the CSS above.
+    -->
+    <p>This is a paragraph. (I am blue because I am a &lt;p&gt; tag)</p>
+    <p>This is another paragraph. (I am also blue)</p>
+
+    <!-- 
+        Example of Class Selector:
+        This <p> tag has `class="highlight"`.
+        It gets BLUE text (because it's a <p>) AND a YELLOW background (from .highlight).
+        Classes allow us to mix styles!
+    -->
+    <p class="highlight">This is a highlighted paragraph. (I have class="highlight")</p>
+
+    <!-- 
+        Example of ID Selector:
+        This <div> has `id="footer"`.
+        It gets BOLD text because of the `#footer` rule.
+        We use <div> (Division) to group content together.
+    -->
+    <div id="footer">Footer Information. (I am unique, id="footer")</div>
+
+</body>
+</html>

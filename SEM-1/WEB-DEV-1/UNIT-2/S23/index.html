@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!-- 
+    HTML DOCUMENT STRUCTURE
+    -----------------------
+    <!DOCTYPE html>: Tells the browser this is an HTML5 document.
+    <html>: The root element of the page.
+    <head>: Contains meta-information (like the title and styles) that isn't shown directly on the page.
+    <body>: Contains the visible content (text, buttons, images) that the user sees.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 23: Transitions & Transformations</title>
+
+    <!-- 
+        CSS (CASCADING STYLE SHEETS)
+        ----------------------------
+        Usually, this code goes in a separate file (e.g., style.css).
+        We put it here in <style> tags so everything is in one place for your revision.
+    -->
+    <style>
+        /* GLOBAL STYLES 
+           -------------
+           'body' selector applies to the whole page.
+           font-family: Sets the text style.
+           background-color: Sets the page background.
+        */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* TOPIC 1: HOVER EFFECTS
+           ----------------------
+           Ref: Lecture Slide 10-16
+           Definition: :hover is a "pseudo-class". It applies styles only when
+           the user moves their mouse over the element.
+        */
+
+        /* Initial state of the button */
+        .hover-btn {
+            background-color: #3498db; /* Blue color */
+            color: white;              /* Text color */
+            padding: 15px 30px;        /* Space inside the button (Top/Bottom, Left/Right) */
+            border: none;              /* Removes default border */
+            font-size: 18px;
+            cursor: pointer;           /* Changes mouse cursor to a hand icon */
+            border-radius: 5px;        /* Rounds the corners */
+            
+            /* Note: Without a transition, this change happens instantly/abruptly */
+        }
+
+        /* State of the button when hovered */
+        .hover-btn:hover {
+            background-color: #2c3e50; /* Darker Blue */
+            /* When you hover, the background instantly changes to this color */
+        }
+
+        /* TOPIC 2: CSS TRANSITIONS
+           ------------------------
+           Ref: Lecture Slide 17-24
+           Definition: Allows property changes (like color) to happen SMOOTHLY 
+           over a duration, instead of instantly.
+        */
+
+        .transition-box {
+            width: 200px;
+            height: 100px;
+            background-color: #e74c3c; /* Red */
+            color: white;
+            display: flex;             /* Centers text vertically and horizontally */
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            border-radius: 8px;
+
+            /* THE TRANSITION PROPERTY
+               -----------------------
+               Syntax: property duration timing-function delay;
+               
+               1. property: background-color (what we want to animate)
+               2. duration: 1s (takes 1 second to finish)
+               3. timing-function: ease-in-out (starts slow, speeds up, ends slow)
+            */
+            transition: background-color 1s ease-in-out, transform 0.5s;
+        }
+
+        .transition-box:hover {
+            background-color: #27ae60; /* Changes to Green smoothly on hover */
+            /* We also added a slight scale transform here */
+            transform: scale(1.1);
+        }
+
+        /* TOPIC 3: CSS TRANSFORMATIONS
+           ----------------------------
+           Ref: Lecture Slide 25-30
+           Definition: Visually changes an element's shape, size, or position 
+           without affecting the document flow (other elements don't move out of the way).
+        */
+
+        /* Common style for all transformation boxes */
+        .transform-container {
+            display: flex;
+            gap: 20px; /* Space between boxes */
+            flex-wrap: wrap; /* Allows boxes to move to next line on small screens */
+            margin-top: 20px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #8e44ad; /* Purple */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 10px;
+            
+            /* Combining Transition + Transform 
+               We add transition here so the transformation happens smoothly 
+            */
+            transition: transform 0.5s;
+        }
+
+        /* SUB-TOPIC: TRANSLATE (Move)
+           Syntax: translate(x, y)
+           Moves element along X (horizontal) and Y (vertical) axis.
+        */
+        .translate:hover {
+            transform: translate(20px, -20px); 
+            /* Moves 20px Right and 20px Up (Negative Y is up) */
+        }
+
+        /* SUB-TOPIC: ROTATE
+           Syntax: rotate(angle)
+           Rotates the element clockwise by a specific degree (deg).
+        */
+        .rotate:hover {
+            transform: rotate(45deg); 
+            /* Rotates 45 degrees clockwise */
+        }
+
+        /* SUB-TOPIC: SCALE (Resize)
+           Syntax: scale(value)
+           1 = original size. >1 = bigger. <1 = smaller.
+        */
+        .scale:hover {
+            transform: scale(1.2); 
+            /* Increases size by 20% */
+        }
+
+        /* SUB-TOPIC: SKEW (Tilt)
+           Syntax: skew(x-angle, y-angle)
+           Tilts the element along the axes.
+        */
+        .skew:hover {
+            transform: skew(20deg); 
+            /* Tilts 20 degrees along the X-axis */
+        }
+
+        /* Formatting for the explanations on the page */
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        p { color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="section">
+        <h1>Lecture 23 Study Guide: Web Development</h1>
+        <p>Hover over the elements below to see the CSS effects from your lecture. <strong>Read the code comments for definitions!</strong></p>
+    </div>
+
+    <!-- SECTION 1: HOVER EFFECT -->
+    <div class="section">
+        <h2>1. The :hover Effect</h2>
+        <p><strong>Concept:</strong> Makes websites interactive. The style changes when the cursor is on the element.</p>
+        
+        <!-- 
+            <button>: A clickable UI element.
+            class="hover-btn": Connects this element to the .hover-btn CSS style rules defined above.
+        -->
+        <button class="hover-btn">Hover Me!</button>
+    </div>
+
+    <!-- SECTION 2: TRANSITIONS -->
+    <div class="section">
+        <h2>2. CSS Transitions</h2>
+        <p><strong>Concept:</strong> Without transition, changes are instant. With transition, changes are smooth.</p>
+        <p>This box takes <strong>1 second</strong> to change color because of <code>transition-duration: 1s</code>.</p>
+        
+        <!-- A div is a generic container for content -->
+        <div class="transition-box">
+            Hover for Transition
+        </div>
+    </div>
+
+    <!-- SECTION 3: TRANSFORMATIONS -->
+    <div class="section">
+        <h2>3. CSS Transformations</h2>
+        <p><strong>Concept:</strong> Modifying the coordinate space to move, spin, grow, or tilt elements.</p>
+        
+        <div class="transform-container">
+            <!-- 
+               Multiple Classes: class="box translate"
+               1. "box": Gives the purple color and size.
+               2. "translate": Gives the specific hover effect for moving.
+            -->
+            
+            <!-- Example A: Translate (Move) -->
+            <div class="box translate">
+                Translate
+            </div>
+
+            <!-- Example B: Rotate (Spin) -->
+            <div class="box rotate">
+                Rotate
+            </div>
+
+            <!-- Example C: Scale (Grow/Shrink) -->
+            <div class="box scale">
+                Scale
+            </div>
+
+            <!-- Example D: Skew (Tilt) -->
+            <div class="box skew">
+                Skew
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

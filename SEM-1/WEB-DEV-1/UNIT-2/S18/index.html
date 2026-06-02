@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 18: Flexbox Deep Dive</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; margin-top: 40px; }
+        .section { background: white; padding: 20px; border: 1px solid #ddd; margin-bottom: 20px; border-radius: 8px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; color: #d63384; font-family: monospace; }
+
+        /* =========================================
+           TOPIC 1: FLEX DIRECTION (Slides 3-7)
+           Controls the "Main Axis" (Row vs Column)
+           ========================================= */
+        .direction-row {
+            display: flex;
+            flex-direction: row; /* Default: Left to Right */
+            background: #e3f2fd; padding: 10px; margin-bottom: 10px;
+        }
+        .direction-column {
+            display: flex;
+            flex-direction: column; /* Stack Top to Bottom */
+            background: #ffebee; padding: 10px;
+        }
+
+        /* =========================================
+           TOPIC 2: JUSTIFY CONTENT (Slides 8-14)
+           Aligns items along the MAIN AXIS (Left/Right usually)
+           ========================================= */
+        .justify-container {
+            display: flex;
+            background: #e8f5e9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px dashed green;
+        }
+
+        /* =========================================
+           TOPIC 3: ALIGN ITEMS (Slides 15-21)
+           Aligns items along the CROSS AXIS (Up/Down usually)
+           IMPORTANT: Container needs HEIGHT to see this work!
+           ========================================= */
+        .align-container {
+            display: flex;
+            height: 150px; /* Necessary to see vertical movement */
+            background: #fff3e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px dashed orange;
+        }
+
+        /* =========================================
+           TOPIC 4: FLEX WRAP (Slides 22-25)
+           What happens when we run out of space?
+           ========================================= */
+        .wrap-container {
+            display: flex;
+            width: 300px; /* Restrict width to force wrapping */
+            background: #f3e5f5;
+            padding: 10px;
+            border: 2px solid purple;
+            
+            /* The Magic Property */
+            flex-wrap: wrap; 
+        }
+
+        /* Shared Item Styles */
+        .box {
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        /* Special classes for specific demos */
+        .box-tall { height: 80px; background-color: #0056b3; } /* For alignment diffs */
+        .box-short { height: 40px; background-color: #4dabf7; }
+
+        /* =========================================
+           CODING QUESTION (Slide 26)
+           "Create a flex container... space items out evenly with space around"
+           ========================================= */
+        .exam-container {
+            display: flex;
+            
+            /* 1. Give container a border */
+            border: 2px solid black;
+            
+            /* 2. Use justify-content to space evenly (Slide 13 says space-around) */
+            justify-content: space-around;
+            
+            padding: 10px;
+            background-color: #eee;
+        }
+        
+        .exam-item {
+            /* 3. Background color, width, height */
+            background-color: coral;
+            width: 80px;
+            height: 80px;
+            color: white;
+            font-weight: bold;
+            display: flex;             /* Just to center the text "1" inside */
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 18: Flexbox & Layout Design II</h1>
+
+    <!-- 1. FLEX DIRECTION -->
+    <div class="section">
+        <h2>1. Flex Direction (The Axis)</h2>
+        <p><strong>Row (Default):</strong> Items sit side-by-side.</p>
+        <div class="direction-row">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        </div>
+
+        <p><strong>Column:</strong> Items stack on top of each other.</p>
+        <div class="direction-column">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        </div>
+    </div>
+
+    <!-- 2. JUSTIFY CONTENT -->
+    <div class="section">
+        <h2>2. Justify Content (Main Axis / Horizontal)</h2>
+        <p>Controls spacing <em>between</em> items.</p>
+        
+        <p><code>justify-content: center;</code> (Pack in middle)</p>
+        <div class="justify-container" style="justify-content: center;">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        </div>
+
+        <p><code>justify-content: space-between;</code> (Push to edges)</p>
+        <div class="justify-container" style="justify-content: space-between;">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        </div>
+
+        <p><code>justify-content: space-evenly;</code> (Equal gaps everywhere)</p>
+        <div class="justify-container" style="justify-content: space-evenly;">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+        </div>
+    </div>
+
+    <!-- 3. ALIGN ITEMS -->
+    <div class="section">
+        <h2>3. Align Items (Cross Axis / Vertical)</h2>
+        <p>Controls how items sit <em>vertically</em> inside the row.</p>
+        
+        <p><code>align-items: center;</code> (Middle of the height)</p>
+        <div class="align-container" style="align-items: center;">
+            <div class="box box-tall">1</div>
+            <div class="box">2</div>
+            <div class="box box-short">3</div>
+        </div>
+
+        <p><code>align-items: stretch;</code> (Default - Fill height)</p>
+        <div class="align-container" style="align-items: stretch;">
+            <!-- Note: Removed fixed height from box styles inline to allow stretch -->
+            <div class="box" style="height: auto;">1</div>
+            <div class="box" style="height: auto;">2</div>
+            <div class="box" style="height: auto;">3</div>
+        </div>
+    </div>
+
+    <!-- 4. FLEX WRAP -->
+    <div class="section">
+        <h2>4. Flex Wrap</h2>
+        <p><code>flex-wrap: wrap;</code> allows items to fall to the next line if there is no space.</p>
+        <div class="wrap-container">
+            <div class="box">1</div><div class="box">2</div><div class="box">3</div>
+            <div class="box">4</div><div class="box">5</div><div class="box">6</div>
+        </div>
+    </div>
+
+    <!-- 5. EXAM QUESTION -->
+    <div class="section">
+        <h2>5. Exam Coding Question (Slide 26)</h2>
+        <p><strong>Task:</strong> Create a flex container and use <code>justify-content</code> to space items with "space around".</p>
+        
+        <div class="exam-container">
+            <div class="exam-item">1</div>
+            <div class="exam-item">2</div>
+            <div class="exam-item">3</div>
+        </div>
+        <p><em>Notice how there is space on the far left/right, but it's smaller than the space between the items. This is `space-around`.</em></p>
+    </div>
+
+</body>
+</html>

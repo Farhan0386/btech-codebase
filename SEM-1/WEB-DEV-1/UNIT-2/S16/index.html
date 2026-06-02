@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 16: Box Model Part II</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #333; }
+        .container { background: white; padding: 20px; margin-bottom: 30px; border: 1px solid #ccc; }
+
+        /* =========================================
+           TOPIC 1: PADDING (Slides 3-5)
+           Space INSIDE the box, around the content.
+           ========================================= */
+        
+        /* 1. Uniform Padding (Slide 3) */
+        .padding-uniform {
+            background-color: lightblue;
+            border: 1px solid blue;
+            /* Adds 20px space on ALL sides */
+            padding: 20px; 
+        }
+
+        /* 2. Individual Sides (Slide 4) */
+        .padding-individual {
+            background-color: lightgreen;
+            border: 1px solid green;
+            /* Custom spacing for each side */
+            padding-top: 10px;
+            padding-right: 15px;
+            padding-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        /* 3. Shorthand (Slide 5) - Clockwise Rule */
+        .padding-shorthand {
+            background-color: plum;
+            border: 1px solid purple;
+            /* Top(10) -> Right(20) -> Bottom(30) -> Left(40) */
+            padding: 10px 20px 30px 40px; 
+        }
+
+        /* =========================================
+           TOPIC 2: BORDERS (Slides 6-10)
+           The edge/wall of the box.
+           ========================================= */
+        
+        /* Border Styles (Slide 7) */
+        .border-solid { border-style: solid; }
+        .border-dashed { border-style: dashed; }
+        .border-dotted { border-style: dotted; }
+        .border-double { border-style: double; }
+
+        /* Border Width & Color (Slide 8) */
+        .border-custom {
+            border-style: solid;
+            border-width: 5px; /* Thickness */
+            border-color: red; /* Color */
+        }
+
+        /* Individual Borders (Slide 9) */
+        .border-individual {
+            border-top: 5px solid blue;    /* Only Top */
+            border-bottom: 5px solid blue; /* Only Bottom */
+            /* Right and Left are missing */
+            background-color: #eee;
+            padding: 10px;
+        }
+
+        /* Border Shorthand (Slide 10) - The Common Way */
+        .border-shorthand {
+            /* Width Style Color (in any order, usually like this) */
+            border: 3px solid orange; 
+            padding: 10px;
+        }
+
+        /* =========================================
+           TOPIC 3: BOX SIZING (Slides 11-14)
+           The most important layout concept!
+           ========================================= */
+
+        /* General styles for comparison boxes */
+        .box-compare {
+            width: 200px;
+            height: 100px;
+            padding: 30px;
+            border: 5px solid red;
+            margin-bottom: 10px;
+            background-color: #eee;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* 1. Content Box (Default behavior) - Slide 12 */
+        /* Math: 200px (width) + 60px (L+R padding) + 10px (L+R border) = 270px Total Width */
+        .content-box-sizing {
+            box-sizing: content-box; 
+        }
+
+        /* 2. Border Box (The "Better" behavior) - Slide 13 */
+        /* Math: Total width IS 200px. Content shrinks to fit. */
+        .border-box-sizing {
+            box-sizing: border-box; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 16: Box Model Part II</h1>
+
+    <!-- PADDING SECTION -->
+    <div class="container">
+        <h2>1. Padding Implementation</h2>
+        <p><strong>Uniform:</strong> 20px all around.</p>
+        <div class="padding-uniform">I have uniform padding.</div>
+        
+        <p><strong>Shorthand:</strong> 10px 20px 30px 40px (Clockwise).</p>
+        <div class="padding-shorthand">I have different padding on every side.</div>
+    </div>
+
+    <!-- BORDER SECTION -->
+    <div class="container">
+        <h2>2. Border Styles & Shorthand</h2>
+        
+        <p class="border-solid" style="padding:5px; margin:5px;">Solid Border</p>
+        <p class="border-dashed" style="padding:5px; margin:5px;">Dashed Border</p>
+        <p class="border-dotted" style="padding:5px; margin:5px;">Dotted Border</p>
+        
+        <h3>Individual Borders</h3>
+        <div class="border-individual">I only have Top and Bottom borders.</div>
+
+        <h3>Border Shorthand</h3>
+        <div class="border-shorthand"><code>border: 3px solid orange;</code></div>
+    </div>
+
+    <!-- BOX SIZING SECTION (The Coding Question) -->
+    <div class="container">
+        <h2>3. Box Sizing (Slide 14 Coding Question)</h2>
+        <p>
+            <strong>Task:</strong> Create two boxes with <code>width: 200px</code>, 
+            <code>padding: 30px</code>, and <code>border: 5px</code>.
+        </p>
+
+        <!-- 
+             SOLUTION to Slide 14 Question:
+             Notice how the first box is visually WIDER than the second box, 
+             even though CSS says "width: 200px" for both!
+        -->
+        
+        <h3>A. Content Box (Default)</h3>
+        <div class="box-compare content-box-sizing">
+            I am 270px wide!<br>
+            (200 + 60 + 10)
+        </div>
+
+        <h3>B. Border Box (The Fix)</h3>
+        <div class="box-compare border-box-sizing">
+            I am 200px wide.<br>
+            (Padding is internal)
+        </div>
+
+        <p><em>Note: Use DevTools to inspect these boxes and confirm the math!</em></p>
+    </div>
+
+</body>
+</html>

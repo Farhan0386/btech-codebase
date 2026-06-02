@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 21: CSS Units</title>
+
+    <style>
+        /* Global Reset */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        /* Base font size for REM calculations (Default is usually 16px) */
+        html { font-size: 16px; }
+
+        h2 { border-bottom: 2px solid #333; padding-bottom: 5px; margin-top: 40px; }
+        .concept-box { background: white; padding: 20px; border: 1px solid #ccc; margin-bottom: 20px; border-radius: 8px; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; color: #d63384; }
+
+        /* =========================================
+           TOPIC 1: ABSOLUTE UNITS (Fixed)
+           They never change size, no matter the screen.
+           ========================================= */
+        .unit-box {
+            background-color: #007bff;
+            color: white;
+            margin-bottom: 10px;
+            padding: 5px;
+            white-space: nowrap; /* Keep text on one line */
+            font-size: 14px;
+        }
+        
+        /* Common Absolute Units */
+        .box-px { width: 100px; background: #4CAF50; } /* Pixels (Screen dots) */
+        .box-in { width: 2in;   background: #2196F3; } /* Inches (Physical ruler) */
+        .box-cm { width: 5cm;   background: #FF9800; } /* Centimeters */
+        .box-mm { width: 50mm;  background: #9C27B0; } /* Millimeters (10mm = 1cm) */
+        .box-pt { width: 200pt; background: #F44336; } /* Points (1/72 inch) */
+        .box-pc { width: 15pc;  background: #607D8B; } /* Picas (12 points) */
+
+
+        /* =========================================
+           TOPIC 2: RELATIVE UNITS (Flexible)
+           They change based on Parent, Screen, or Font.
+           ========================================= */
+        
+        /* EM vs REM Demo */
+        .parent-font-size {
+            font-size: 20px; /* Parent has big text */
+            border: 1px dashed #999;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* EM looks at the PARENT font size (20px) */
+        /* 10em = 10 * 20px = 200px */
+        .box-em { 
+            width: 10em; 
+            background: teal; 
+        } 
+
+        /* REM looks at the ROOT (html) font size (16px) */
+        /* 10rem = 10 * 16px = 160px */
+        .box-rem { 
+            width: 10rem; 
+            background: darkorange; 
+        }
+
+        /* Viewport Units */
+        /* 50vw = 50% of the browser window width */
+        .box-vw { width: 50vw; background: seagreen; }
+        
+        /* 20vh = 20% of the browser window height */
+        .box-vh { height: 20vh; width: 100px; background: crimson; display: flex; align-items: center; justify-content: center;}
+
+
+        /* =========================================
+           CODING QUESTION (Slide 41)
+           "px vs % Width"
+           ========================================= */
+        
+        .parent-container {
+            /* I added 'resize' so you can drag the corner to test it! */
+            resize: horizontal; 
+            overflow: auto; /* Required for resize to work */
+            
+            width: 600px; /* Initial fixed width */
+            height: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            background-color: #fff;
+            margin-bottom: 50px;
+        }
+
+        #div1 {
+            width: 300px; /* Fixed: Will ALWAYS be 300px */
+            height: 80px;
+            background-color: lightblue;
+            margin-bottom: 10px;
+            display: flex; align-items: center; padding-left: 10px;
+        }
+
+        #div2 {
+            width: 50%; /* Relative: Will always be half of the parent */
+            height: 80px;
+            background-color: lightcoral;
+            display: flex; align-items: center; padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 21: CSS Units</h1>
+    <p><em>"Would you build a house without measuring tools?"</em></p>
+
+    <!-- TOPIC 1: ABSOLUTE UNITS -->
+    <div class="concept-box">
+        <h2>1. Absolute Units (Fixed)</h2>
+        <p>These are fixed to a physical size. They do <strong>NOT</strong> change when the screen resizes.</p>
+        <ul>
+            <li><strong>px:</strong> Pixels (Most common for screens).</li>
+            <li><strong>in, cm, mm:</strong> Physical units (Best for print, bad for screens).</li>
+        </ul>
+        
+        <div class="unit-box box-px">100px</div>
+        <div class="unit-box box-in">2in</div>
+        <div class="unit-box box-cm">5cm</div>
+        <div class="unit-box box-mm">50mm</div>
+        <div class="unit-box box-pt">200pt</div>
+        <div class="unit-box box-pc">15pc</div>
+    </div>
+
+    <!-- TOPIC 2: RELATIVE UNITS -->
+    <div class="concept-box">
+        <h2>2. Relative Units (Flexible)</h2>
+        <p>These adapt based on other factors. Essential for <strong>Responsive Design</strong>.</p>
+        
+        <h3>EM vs REM (Font Relative)</h3>
+        <div class="parent-font-size">
+            <p>I am the Parent Container (font-size: 20px)</p>
+            
+            <div class="unit-box box-em">
+                <strong>10em</strong><br>
+                (10 * Parent 20px = 200px)
+            </div>
+            
+            <div class="unit-box box-rem">
+                <strong>10rem</strong><br>
+                (10 * Root 16px = 160px)
+            </div>
+        </div>
+
+        <h3>Viewport Units (Screen Relative)</h3>
+        <div class="unit-box box-vw">50vw (Half Screen Width)</div>
+        <div class="unit-box box-vh">20vh Height</div>
+    </div>
+
+    <!-- CODING CHALLENGE -->
+    <div class="concept-box">
+        <h2>3. Exam Coding Question (Slide 41)</h2>
+        <p><strong>Task:</strong> Observe behavior of <code>300px</code> vs <code>50%</code>.</p>
+        <p style="color: red; font-weight: bold;">👇 DRAG the bottom-right corner of the black box below! 👇</p>
+        
+        <div class="parent-container">
+            <div id="div1">
+                <strong>Fixed (300px)</strong><br>
+                I stay 300px forever.
+            </div>
+            
+            <div id="div2">
+                <strong>Relative (50%)</strong><br>
+                I grow/shrink with the parent!
+            </div>
+        </div>
+        
+        <p><strong>Observation:</strong> When you shrink the parent, the 300px box might overflow (stick out), but the 50% box will always stay perfectly inside.</p>
+    </div>
+
+</body>
+</html>

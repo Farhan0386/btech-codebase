@@ -1,0 +1,362 @@
+// console.log("Helllo students!!")
+
+// let obj={
+//     name:"Alex",
+//     age:45,
+//     Address:"GGN"
+// }
+// let obj2={
+//     name:"Alex",
+//     age:45,
+//     Address:"GGN"
+// }
+// obj.name="Bob"
+// console.log(obj)
+
+
+// const para=document.getElementById('para')
+// para.innerText="This is updated paragraph"
+// para.style.color="green"
+// console.log(para)
+
+
+// const para=document.querySelector('.para')
+// para.textContent="This is updated paragraph"
+// para.style.color="green"
+// console.log(para)
+
+// const para=document.getElementsByClassName('para')  //return HTMLCollection
+// para[0].innerText="This is updated paragraph"
+// para[1].style.color="green"
+// console.log(para)
+
+
+// const para2=document.querySelectorAll('.para') //return NodeList
+// para2[0].innerText="This is updated paragraph"
+// para2[1].style.color="green"
+// console.log(para2)
+
+// let arr=[23,45,235,56,45,3,2]
+// arr.forEach((ele)=>console.log(ele))
+
+
+// const container=document.querySelector(".container")
+// container.innerHTML="<h1>This is a heading</h1>"
+// console.log(container)
+
+// const btn=document.querySelector("button");
+// btn.classList.add("btn")
+// // btn.classList.remove('btn')
+// // btn.classList.toggle('btn')
+
+
+// function print(){
+//     console.log("Hello you have clicked the button")
+// }
+
+// btn.addEventListener('click',print)
+// btn.removeEventListener('click',print)
+// btn.addEventListener('click',()=>console.log("Hello you have clicked the button"))
+
+
+// const click=document.querySelector('#click')
+// // const stop=document.querySelector('#stop')
+
+// function message(event){
+//     console.log(event.key)
+//     console.log("Button Clicked!!")
+// }
+
+// click.addEventListener('mouseover',message)
+// click.addEventListener('keydown',message)
+// click.addEventListener('keyup',message)
+// stop.addEventListener('click',()=>{
+//     console.log("Stop button clicked!!")
+//     click.removeEventListener('click',message)
+// })
+
+// const form=document.querySelector('form')
+// form.addEventListener('submit',(event)=>{
+//     event.preventDefault()
+//     console.log("Form Submitted!!")
+// })
+
+// const div=document.querySelector('.container')
+// const div2=document.querySelector('.outer')
+// const btn=document.querySelector('button')
+
+
+// div.addEventListener('click',()=>{console.log("Clicked the Div")},false)
+// div2.addEventListener('click',()=>{console.log("Clicked the Outer Div")},false)
+// btn.addEventListener('click',()=>{console.log("Clicked the Button")},false)
+
+// console.log("this is a new code")
+
+// debugger
+// console.log(a)
+// // console.log(b)
+
+// var a=678
+// let b=567
+
+// console.log(a)
+// console.log(b)
+
+// function print(){
+//     let c=63
+//     console.log(c)
+//     console.log("inside fn")
+// }
+
+// print()
+
+// function greet(){
+//     var message="Hello"
+//     console.log(message)
+// }
+// greet()
+// console.log(message)
+// console.log(d)
+// debugger
+// function first(){
+//     second()
+// }
+// function second(){
+//     third()
+// }
+// function third(){
+//     console.trace()
+// }
+// first()
+
+// function infinite(){
+//     infinite()
+// }
+// infinite()
+
+
+// console.log(a)
+// let a=34645
+
+// let total=100
+// function calculate(){
+//     console.log(total)
+//     let total=50
+// }
+// calculate()
+
+
+// console.log("User presssed the submit button")
+// setTimeout(()=>{console.log("Verify credential")},1000)
+// console.log("Login to dashboard")
+
+
+// const id=setTimeout(()=>{
+//     alert("after 3 sec")
+// },3*1000)
+
+// clearTimeout(id)
+
+// const timerId=setInterval(()=>{
+//     console.log("After 3 sec")
+// },1000)
+// console.log(timerId)
+// setTimeout(()=>{
+//     clearInterval(timerId)
+// },10*1000)
+
+
+// let count=1
+
+// const timerId=setInterval(()=>{
+//     if(count===10)clearInterval(timerId)
+//     console.log(count)
+//     count+=1
+// },1000)
+
+
+// console.log("Before timout")
+// setTimeout(()=>{
+//     console.log("Inside timeout")
+// },0)
+// console.log("AFter timeout")
+
+// const name=document.querySelector("#name")
+// const btn=document.querySelector(".btn")
+// const list=document.querySelector(".list")
+
+// btn.addEventListener('click',()=>{
+
+//     if(name.value==="")return
+//     //creating element
+//     const li=document.createElement('li')
+//     const dlt=document.createElement('button')
+
+//     //providing text
+//     dlt.innerText="Delete"
+//     li.innerText=name.value;
+
+//     dlt.addEventListener('click',()=>{
+//         list.removeChild(li)
+//     })
+
+//     //appending the element
+//     list.appendChild(li)
+//     li.appendChild(dlt)
+
+//     //clearing text
+//     name.value=""
+// })
+
+// console.log("Before timout")
+// setTimeout(()=>{
+//     console.log("Inside timeout")
+// },0)
+// console.log("AFter timeout")
+
+
+// function greet(xyz){  //higher order fn
+//     setTimeout(()=>{
+//         console.log("Hello Students!!")
+//         xyz(45)
+//     },2000)
+// }
+
+// function print(num){ //callback fn
+//     console.log("Total students are",num)
+// }
+
+// greet(print)
+
+// console.log("Before Promise")
+// const p=new Promise((res,rej)=>{
+//     let done=true
+//     res({name:"Alex",age:34})
+    
+//     setTimeout(()=>{
+//         if(done){
+//             res({name:"Alex",age:34})
+//         }else{
+//             rej("Work is not done")
+//         }
+//     },5000)
+// })
+
+// p.then((msg)=>{
+//     console.log(msg)
+// }).catch((err)=>{
+//     console.log(err)
+// }).finally(()=>{
+//     console.log("Finally block")
+// })
+
+// console.log("After Promise")
+
+
+// function doHomework(){
+//     const p=new Promise((res,rej)=>{
+//         setTimeout(()=>{
+//             let done=true
+//             if(done){
+//                 console.log("Homework is done")
+//                 res("Homework Complete")
+//             }else{
+//                 rej("Homework not complete")
+//             }
+//         },2000)
+//     })
+//     return p
+// }
+
+// function eatDinner(){
+//     const p=new Promise((res,rej)=>{
+//         setTimeout(()=>{
+//             let done=true
+//             if(done){
+//                 console.log("Dinner is done")
+//                 res("Dinner Complete")
+//             }else{
+//                 rej("Dinner not complete")
+//             }
+//         },2000)
+//     })
+//     return p
+// }
+
+// function gotoPlayground(){
+//     const p=new Promise((res,rej)=>{
+//         setTimeout(()=>{
+//             let done=false
+//             if(done){
+//                 console.log(" Went to Playground")
+//                 res("Playground Time")
+//             }else{
+//                 rej("Not allowed")
+//             }
+//         },2000)
+//     })
+//     return p
+// }
+
+// doHomework().then((msg)=>{
+//     console.log(msg)
+//     return eatDinner()
+// }).then((msg)=>{
+//     console.log(msg)
+//     return gotoPlayground()
+// }).then((msg)=>{
+//     console.log(msg)
+// }).catch((err)=>{
+//     console.log(err)
+// }).finally(()=>{
+//     console.log("Go to Sleep")
+// })
+
+
+// console.log("First Line")
+
+// setTimeout(()=>{
+//     console.log("Second Line")
+// },0)
+
+// const p=new Promise((res,rej)=>{
+//     res()
+// })
+// p.then(()=>{
+//     console.log("Third Line")
+// })
+// const p2=new Promise((res,rej)=>{
+//     res()
+// })
+// p2.then(()=>{
+//     console.log("Fourth Line")
+// })
+
+// console.log("Last Line")
+
+const form=document.querySelector('.form')
+const eventCards=document.querySelector('.cards')
+
+form.addEventListener('submit',(e)=>{
+    e.preventDefault()
+
+    let title=eventTitle.value
+    let date=eventDate.value
+    let cat=category.value
+    let desc=description.value
+
+    const card=document.createElement('div')
+    card.classList.add('card')
+    card.innerHTML=`
+        <h3>${title}</h3>
+        <p> 🗓️${date}</p>
+        <button>${cat}</button>
+        <p>${desc}</p>
+    `
+    eventCards.appendChild(card)
+
+})
+
+document.addEventListener('keydown',(e)=>{
+    console.log(e.key)
+})

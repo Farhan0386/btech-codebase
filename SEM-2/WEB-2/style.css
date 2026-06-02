@@ -1,0 +1,28 @@
+.btn{
+    border: 2px solid black;
+    width: 100px;
+    height: 40px;
+    background-color: aqua;
+
+}
+
+.submit{
+    border-radius: 10px;
+    
+}
+
+li{
+    width: 300px;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+
+.card{
+    background-color: antiquewhite;
+    width:150px;
+    
+}

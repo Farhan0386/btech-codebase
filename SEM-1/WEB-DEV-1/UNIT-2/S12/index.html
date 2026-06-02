@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 12: Advanced Selectors Prep</title>
+
+    <!-- 
+        INTERNAL CSS SECTION
+        Here we define the rules based on your Lecture 12 slides.
+    -->
+    <style>
+        /* =========================================
+           TOPIC 1: ATTRIBUTE SELECTORS (Slides 3-8)
+           Target elements based on their attributes (like type, href, etc.)
+           ========================================= */
+
+        /* 1. Basic Attribute Selector
+           Target: Any <input> that has type="text".
+           WHY: To style text boxes differently from checkboxes or buttons.
+           (From Slide 7 Coding Question)
+        */
+        input[type="text"] {
+            border: 2px solid gray;
+            padding: 5px;
+            margin-bottom: 5px;
+            /* This makes the text box have a gray border */
+        }
+
+        /* 2. Specific Value Selector
+           Target: Any <input> that has type="email".
+           (From Slide 7 Coding Question)
+        */
+        input[type="email"] {
+            border: 2px solid blue; /* Blue border for emails */
+            color: blue;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* 3. "Starts With" Selector (Symbol: ^=)
+           Target: Links (<a>) where the href starts with "https".
+           WHY: To mark secure links differently.
+           (From Slide 5)
+        */
+        a[href^="https"] {
+            color: green;
+            font-weight: bold;
+            /* Secure links will be green */
+     
+        }
+
+        /* 4. Submit Button Styling
+           (From Slide 7 Coding Question)
+        */
+        input[type="submit"] {
+            background-color: green;
+            color: white;
+            padding: 8px 15px;
+            border: red solid 2px;
+            border-radius: 4px;
+            cursor: pointer; /* Changes mouse cursor to a hand */
+
+        }
+
+
+        /* =========================================
+           TOPIC 2: COMBINATOR SELECTORS (Slides 9-14)
+           Target elements based on their relationship to others (Family Tree).
+           ========================================= */
+
+        /* 1. DESCENDANT SELECTOR (Symbol: Space)
+           Syntax: div p
+           Target: ALL <p> tags inside a <div>, no matter how deep.
+           (From Slide 11)
+        */
+        .descendant-box p {
+            color: blue;
+            /* All paragraphs inside the class .descendant-box will be blue */
+        }
+
+        /* 2. CHILD SELECTOR (Symbol: >)
+           Syntax: div > p
+           Target: ONLY direct children (immediate nesting).
+           NOTE: It will NOT select a paragraph if it's inside another tag within the div.
+           (From Slide 12)
+        */
+        .child-box > p {
+            background-color: #e0f7fa; /* Light Cyan background */
+            border-left: 4px solid teal;
+            border-right: 4px solid teal;
+            padding: 5px;
+        }
+
+        /* 3. ADJACENT SIBLING SELECTOR (Symbol: +)
+           Syntax: h2 + p
+           Target: The paragraph IMMEDIATELY after an <h2>.
+           (From Slide 13)
+        */
+        h3 + p {
+            color: red;
+            font-style: italic;
+            /* Only the p directly touching the bottom of the h3 gets this */
+        }
+
+        /* 4. GENERAL SIBLING SELECTOR (Symbol: ~)
+           Syntax: h2 ~ p
+           Target: ALL paragraphs that come AFTER an <h2> (siblings).
+           (From Slide 14)
+        */
+        h4 ~ span {
+            color: purple;
+            font-weight: bold;
+        }
+
+        /* Basic styling for layout (Ignore for exam) */
+        body { font-family: sans-serif; max-width: 800px; margin: 20px auto; line-height: 1.6;}
+        section { border: 3px solid #9ae1ea; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        h2, h3, h4 { border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 12: End Term Exam Prep</h1>
+    <p>This page demonstrates Attribute and Combinator selectors from your slides.</p>
+
+    <!-- 
+       PART 1: ATTRIBUTE SELECTORS 
+       This solves the "Coding Question" on Slide 6 & 7.
+    -->
+    <section>
+        <h2>1. Attribute Selectors (The Form Task)</h2>
+        <p>The exam question asks to style inputs differently based on their type.</p>
+        
+        <form>
+            <label for="name">Name (type="text"):</label><br>
+            <!-- Matches input[type="text"] -->
+            <input type="text" id="name" placeholder="Gray Border"><br>
+
+            <label for="email">Email (type="email"):</label><br>
+            <!-- Matches input[type="email"] -->
+            <input type="email" id="email" placeholder="Blue Border"><br><br>
+
+            <label>Links (Starts with selector):</label><br>
+            <!-- Matches a[href^="https"] -->
+            <a href="https://google.com">Secure Link (https)</a> - Green<br>
+            <a href="http://example.com">Normal Link (http)</a> - Default Color<br><br>
+
+            <!-- Matches input[type="submit"] -->
+            <input type="submit" value="Subscribe (Green Button)">
+        </form>
+    </section>
+
+    <!-- 
+       PART 2: COMBINATOR SELECTORS 
+    -->
+    <section class="descendant-box">
+        <h2>2. Descendant Selector (Space)</h2>
+        <p>I am a direct child (Blue).</p>
+        <div>
+            <p>I am nested inside a div (Grandchild) - Still Blue!</p>
+        </div>
+    </section>
+
+    <section class="child-box">
+        <h2>3. Child Selector (>)</h2>
+        <p>I am a direct child of .child-box (I get styles!).</p>
+        <div>
+            <p>I am nested deeper (Grandchild) - I get NO styles.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Adjacent Sibling (+)</h2>
+        <h3>I am an H3 Heading</h3>
+        <p>I am immediately after H3 (Red & Italic).</p>
+        <p>I am the second paragraph (Normal style).</p>
+    </section>
+
+    <section>
+        <h2>5. General Sibling (~)</h2>
+        <h4>I am an H4 Heading</h4>
+        <span>Sibling 1 (Purple)</span><br>
+        <span>Sibling 2 (Purple)</span><br>
+        <b>I am a bold tag (Not selected)</b><br>
+        <span>Sibling 3 (Purple)</span>
+    </section>
+
+</body>
+</html>

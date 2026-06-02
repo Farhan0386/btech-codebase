@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 17: Flexbox Basics</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; color: #333; margin-top: 40px; }
+        .section-box { background: white; padding: 20px; border: 1px solid #ccc; margin-bottom: 20px; }
+
+        /* =========================================
+           TOPIC 1: DISPLAY PROPERTIES (Slides 6-7 & 18)
+           Block vs Inline vs Inline-Block
+           ========================================= */
+        
+        /* Common styles for our test spans */
+        .display-test span {
+            border: 2px solid blue;
+            padding: 10px;
+            margin: 5px;
+            background-color: lightblue;
+        }
+
+        /* A. Default (Inline) - No extra CSS needed */
+        
+        /* B. Block (Slide 18 Task 2) */
+        #block-demo span {
+            display: block; /* Takes full width, starts new line */
+        }
+
+        /* C. Inline-Block (Slide 18 Task 3) */
+        #inline-block-demo span {
+            display: inline-block; /* Sits inline, but respects margins/padding like a block */
+        }
+
+
+        /* =========================================
+           TOPIC 2: FLEXBOX BASICS (Slides 9-16)
+           The Modern Layout Tool
+           ========================================= */
+
+        /* The Container (Parent) */
+        .flex-container {
+            background-color: #2c3e50; /* Dark Blue Parent */
+            padding: 10px;
+            height: 200px; /* Giving height to show vertical alignment */
+            
+            /* STEP 1: Turn on Flexbox */
+            display: flex; 
+            
+            /* STEP 2: Control Direction (Row is default) */
+            /* flex-direction: row; */
+
+            /* STEP 3: Horizontal Alignment (Main Axis) */
+            /* Options: flex-start, flex-end, center, space-between, space-around */
+            justify-content: space-around; 
+
+            /* STEP 4: Vertical Alignment (Cross Axis) */
+            /* Options: stretch, flex-start, flex-end, center */
+            align-items: center; 
+            
+            /* STEP 5: Wrapping (Slide 16) */
+          /* ?  flex-wrap: wrap; */
+        }
+
+        /* The Items (Children) */
+        .flex-item {
+            background-color: coral;
+            color: white;
+            width: 80px;
+            height: 80px;
+            margin: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 17: Flexbox & Layout Design I</h1>
+
+    <!-- TOPIC 1: DISPLAY PROPERTIES -->
+    <div class="section-box display-test">
+        <h2>1. Display Properties (Coding Question Slide 18)</h2>
+        
+        <h3>A. Default (display: inline)</h3>
+        <p>They sit side-by-side but ignore top/bottom margins.</p>
+        <div>
+            <span>Span 1</span><span>Span 2</span><span>Span 3</span>
+        </div>
+
+        <h3>B. Block (display: block)</h3>
+        <p>They take full width and stack vertically.</p>
+        <div id="block-demo">
+            <span>Span 1</span><span>Span 2</span><span>Span 3</span>
+        </div>
+
+        <h3>C. Inline-Block (display: inline-block)</h3>
+        <p>Best of both worlds! Sits inline but respects box model.</p>
+        <div id="inline-block-demo">
+            <span>Span 1</span><span>Span 2</span><span>Span 3</span>
+        </div>
+    </div>
+
+    <!-- TOPIC 2: FLEXBOX -->
+    <div class="section-box">
+        <h2>2. Flexbox Implementation</h2>
+        <p>
+            <strong>Parent:</strong> <code>display: flex;</code><br>
+            <strong>Justify Content:</strong> <code>space-around</code> (Horizontal spacing)<br>
+            <strong>Align Items:</strong> <code>center</code> (Vertical centering)
+        </p>
+        
+        <!-- The Flex Container -->
+        <div class="flex-container">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+        </div>
+        
+        <p><em>Try editing the code to change `justify-content` to `center` or `flex-end`!</em></p>
+    </div>
+
+</body>
+</html>

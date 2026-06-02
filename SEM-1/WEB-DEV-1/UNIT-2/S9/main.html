@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CSS Types Demo</title>
+
+  <!-- Internal CSS: Styles applied to the entire page -->
+  <style>
+    h1 {
+      color: purple; /* Sets heading color */
+    }
+    p {
+      color: gray; /* Sets paragraph color */
+      font-size: 18px; /* Sets font size */
+    }
+  </style>
+
+  <!-- External CSS: Linked stylesheet (assume style.css exists) -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Inline CSS: Styling directly inside the tag -->
+  <h1 style="text-align: center;">Welcome to My Page</h1>
+
+  <p>This paragraph uses internal CSS.</p>
+
+  <p style="color: navy; font-size: 22px;">
+    This paragraph uses inline CSS.
+  </p>
+
+  <p class="external-style">
+    This paragraph will be styled by external CSS (see style.css).
+  </p>
+
+</body>
+</html>

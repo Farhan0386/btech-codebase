@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 15: The Box Model</title>
+
+    <style>
+        /* GLOBAL RESET */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f0f0; /* Light gray background to see margins better */
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           TOPIC 1: THE 4 LAYERS (Slides 4-6 & 11-12)
+           The "Gift Wrapping" Analogy
+           ========================================= */
+        
+        .box-model-demo {
+            /* 1. CONTENT (The Gift) */
+            /* The text inside is the content. */
+            background-color: #e3f2fd; /* Light Blue */
+            
+            /* 2. PADDING (The Bubble Wrap) */
+            /* Space BETWEEN the content and the border. 
+               It protects the content. */
+            padding: 20px; 
+            
+            /* 3. BORDER (The Cardboard Box) */
+            /* The edge around the padding. */
+            border: 5px solid #0d47a1; /* Dark Blue thick border */
+            
+            /* 4. MARGIN (Space between Gifts) */
+            /* Space OUTSIDE the border. Separates this element from others. */
+            margin: 20px; 
+        }
+
+        /* =========================================
+           TOPIC 2: MARGIN TYPES (Slides 13-16)
+           Different ways to write margin code.
+           ========================================= */
+
+        /* A. Uniform Margin (Slide 13) */
+        .margin-uniform {
+            background-color: lightcoral;
+            border: 2px solid red;
+            
+            /* Adds 20px to ALL 4 sides (Top, Right, Bottom, Left) */
+            margin: 20px; 
+        }
+
+        /* B. Individual Sides (Slide 14) */
+        .margin-individual {
+            background-color: lightgreen;
+            border: 2px solid green;
+            
+            /* We can control each side separately */
+            margin-top: 10px;    /* Small space on top */
+            margin-bottom: 50px; /* Huge space on bottom */
+            margin-left: 0;      /* No space on left */
+            margin-right: 0;
+        }
+
+        /* C. Shorthand Clockwise (Slide 15) */
+        /* EXAM TIP: Remember the Clock! 12:00 -> 3:00 -> 6:00 -> 9:00 */
+        .margin-shorthand {
+            background-color: plum;
+            border: 2px solid purple;
+            width: 50%; /* Making it smaller so we can see the margins */
+            
+            /* Syntax: Top Right Bottom Left */
+            margin: 10px 50px 20px 5px; 
+        }
+
+        /* D. Centering with Auto (Slide 16) */
+        /* This is the most common way to center a website layout */
+        .margin-auto {
+            background-color: orange;
+            border: 2px solid darkorange;
+            
+            /* 1. You MUST give it a width */
+            width: 300px; 
+            
+            /* 2. Top/Bottom = 0 (or whatever you want)
+               3. Left/Right = auto (Browser calculates equal space) */
+            margin: 0 auto; 
+        }
+
+        /* Utility styling for this page */
+        .container-box {
+            background-color: white;
+            border: 1px dashed #999; /* Dashed line to show the container boundary */
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+        h3 { border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 15: The Box Model</h1>
+    <p>Every element on a webpage is a box. We control its size using 4 layers.</p>
+
+    <!-- DEMO OF LAYERS -->
+    <div class="container-box">
+        <h3>1. The 4 Layers (Analogy)</h3>
+        <p>Inspect this blue box to see the layers in DevTools!</p>
+        
+        <div class="box-model-demo">
+            <strong>I AM THE CONTENT (The Gift)</strong><br>
+            The space around me is Padding (Bubble Wrap).<br>
+            The line around that is Border (The Box).<br>
+            The space outside the blue line is Margin (Space between gifts).
+        </div>
+        
+        <div>I am a neighbor element. Notice the gap (Margin) between us?</div>
+    </div>
+
+    <!-- MARGIN EXAMPLES -->
+    <div class="container-box">
+        <h3>2. Margin Examples</h3>
+        
+        <!-- Uniform -->
+        <p><strong>A. Uniform (margin: 20px)</strong> - Equal space all around.</p>
+        <div class="margin-uniform">I have 20px margin on all sides.</div>
+        
+        <hr>
+
+        <!-- Individual -->
+        <p><strong>B. Individual Sides</strong> - Small top margin, HUGE bottom margin.</p>
+        <div class="margin-individual">I have 50px margin on the bottom!</div>
+        <div>(I am pushed down by the box above)</div>
+
+        <hr>
+
+        <!-- Clockwise Shorthand -->
+        <p><strong>C. Shorthand (Clockwise Rule)</strong></p>
+        <code>margin: 10px 50px 20px 5px;</code>
+        <div class="margin-shorthand">
+            Top: 10px<br>
+            Right: 50px<br>
+            Bottom: 20px<br>
+            Left: 5px
+        </div>
+
+        <hr>
+
+        <!-- Centering -->
+        <p><strong>D. Centering (The "Magic" Code)</strong></p>
+        <code>margin: 0 auto;</code>
+        <div class="margin-auto">
+            I am centered horizontally!<br>
+            (Requires a width)
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- 
+    K.R. MANGALAM UNIVERSITY - WEB DEVELOPMENT I
+    END TERM EXAM STUDY GUIDE
+    --------------------------------------------
+    This file combines Lecture 23 (Transitions) and Lecture 24 (Animations).
+    Read the comments to understand definitions and logic.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Study Guide: Lectures 23 & 24</title>
+
+    <style>
+        /* GLOBAL STYLES (General formatting for the page) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid #3498db; /* Visual marker for sections */
+        }
+
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        h2 { color: #3498db; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: #e67e22; margin-top: 20px; }
+        code { background-color: #eee; padding: 2px 5px; border-radius: 3px; font-family: monospace; color: #c7254e; }
+
+        /* =========================================
+           LECTURE 23: TRANSITIONS & TRANSFORMATIONS
+           ========================================= */
+
+        /* 1. HOVER BUTTON */
+        .hover-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            
+            /* TRANSITION PROPERTY:
+               We add this here so the hover effect is SMOOTH, not instant.
+               It will take 0.3 seconds to change background color.
+            */
+            transition: background-color 0.3s ease; 
+        }
+
+        .hover-btn:hover {
+            background-color: #2c3e50; /* Darker blue on hover */
+        }
+
+        /* 2. TRANSFORMATIONS (Move, Rotate, Scale, Skew) */
+        .transform-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #9b59b6; /* Purple */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: transform 0.4s; /* Smooth movement */
+        }
+
+        /* Move right 20px, Up 10px */
+        .translate:hover { transform: translate(20px, -10px); }
+        
+        /* Spin 45 degrees */
+        .rotate:hover { transform: rotate(45deg); }
+        
+        /* Grow 1.2 times larger */
+        .scale:hover { transform: scale(1.2); }
+        
+        /* Tilt 20 degrees */
+        .skew:hover { transform: skew(20deg); }
+
+
+        /* =========================================
+           LECTURE 24: CSS ANIMATIONS
+           ========================================= 
+           Difference from Transition:
+           - Transitions need a trigger (like hover).
+           - Animations can run automatically and loop infinitely.
+           - Animations use @keyframes to define steps.
+        */
+
+        /* EXAMPLE 1: THE LOADING SPINNER (Slide 22) */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            /* Create a circle with borders */
+            border: 6px solid #ccc;        /* Grey border (background) */
+            border-top: 6px solid #3498db; /* Blue border (the spinning part) */
+            border-radius: 50%;            /* Makes it a perfect circle */
+            
+            /* ANIMATION SHORTHAND SYNTAX:
+               name | duration | timing-function | iteration-count
+            */
+            animation: spin 1s linear infinite;
+        }
+
+        /* @keyframes: This defines the "movie script" for the animation.
+           Name: spin
+        */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }      /* Start position */
+            100% { transform: rotate(360deg); }  /* End position (full circle) */
+        }
+
+        /* EXAMPLE 2: FADING BOX (Slide 26 - Coding Question) */
+        .fade-box {
+            width: 100px;
+            height: 100px;
+            background-color: #e74c3c; /* Red */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+
+            /* Applying the fade animation */
+            animation-name: fadeInOut;
+            animation-duration: 2s;
+            animation-iteration-count: infinite; /* Runs forever */
+            animation-timing-function: ease-in-out; 
+        }
+
+        /* Logic: Opacity 1 is visible, Opacity 0 is invisible.
+           0% -> 50% -> 100% creates a cycle: Visible -> Invisible -> Visible
+        */
+        @keyframes fadeInOut {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* COMPARISON TABLE STYLES */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+
+    </style>
+</head>
+<body>
+
+    <h1>End Term Exam Study Guide</h1>
+    <p style="text-align: center;">Covers Lecture 23 & 24: Transitions, Transformations, and Animations</p>
+
+    <!-- LECTURE 23 CONTENT -->
+    <div class="section">
+        <h2>Lecture 23: Transitions & Transformations</h2>
+        
+        <h3>1. The :hover Effect & Transitions</h3>
+        <p><strong>Definition:</strong> <code>:hover</code> activates styles when the mouse is over an element. <code>transition</code> makes the change smooth.</p>
+        <button class="hover-btn">Hover Me (Color Change)</button>
+
+        <h3>2. Transformations</h3>
+        <p><strong>Definition:</strong> Modifies the coordinate space (Move, Resize, Rotate) without affecting layout.</p>
+        <div class="transform-container">
+            <div class="box translate">Translate</div>
+            <div class="box rotate">Rotate</div>
+            <div class="box scale">Scale</div>
+            <div class="box skew">Skew</div>
+        </div>
+    </div>
+
+    <!-- LECTURE 24 CONTENT -->
+    <div class="section" style="border-left-color: #e67e22;">
+        <h2>Lecture 24: CSS Animations</h2>
+        <p><strong>Concept:</strong> Allows complex sequences of changes that can run automatically without user interaction (unlike hover).</p>
+
+        <h3>Example 1: Loading Spinner</h3>
+        <p><strong>Logic:</strong> Uses <code>@keyframes</code> to rotate an element from 0deg to 360deg infinitely.</p>
+        <div class="spinner"></div>
+
+        <h3>Example 2: Fade In/Out (Coding Question)</h3>
+        <p><strong>Logic:</strong> Changes <code>opacity</code> from 1 (visible) to 0 (invisible) and back.</p>
+        <div class="fade-box">Fading...</div>
+
+        <h3>Comparison: Transition vs Animation</h3>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>CSS Transition</th>
+                <th>CSS Animation</th>
+            </tr>
+            <tr>
+                <td>Trigger</td>
+                <td>Needs a trigger (like :hover)</td>
+                <td>Runs automatically</td>
+            </tr>
+            <tr>
+                <td>Control</td>
+                <td>Limited (A to B)</td>
+                <td>Full Control (@keyframes)</td>
+            </tr>
+            <tr>
+                <td>Looping</td>
+                <td>Cannot loop</td>
+                <td>Can loop infinite times</td>
+            </tr>
+            <tr>
+                <td>Use Case</td>
+                <td>Simple hover effects</td>
+                <td>Complex motion, loaders</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

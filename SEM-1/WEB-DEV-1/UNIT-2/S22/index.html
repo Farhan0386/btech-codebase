@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 22: Media Queries</title>
+
+    <style>
+        /* =========================================
+           GLOBAL STYLES (Default / Desktop)
+           This is what the page looks like normally.
+           ========================================= */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+            transition: background-color 0.5s ease; /* Smooth color change */
+            background-color: lightblue; /* Default color (Desktop) */
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+        
+        .status-box {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px dashed #333;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        /* Helper to show current width */
+        .width-indicator::after {
+            content: "Current View: Desktop (> 600px)";
+            color: green;
+        }
+
+        /* =========================================
+           TOPIC: MEDIA QUERY SYNTAX (Slide 15)
+           @media (condition) { ... }
+           ========================================= */
+        
+        /* CODING QUESTION SOLUTION (Slide 32)
+           "Change background-color to lightyellow when width is 600px or less."
+        */
+        
+        @media (max-width: 600px) {
+            
+            /* 1. Change Body Background */
+            body {
+                background-color: lightyellow; /* The Exam Answer */
+            }
+
+            /* Visual Helpers for this Demo (Not part of exam, but helps you see it) */
+            .width-indicator::after {
+                content: "Current View: Mobile (<= 600px)";
+                color: orange;
+            }
+            
+            .container {
+                border: 5px solid orange; /* Add a border so you know it worked */
+            }
+            
+            h1 {
+                font-size: 1.2rem; /* Make text smaller on mobile */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Lecture 22: Media Queries</h1>
+        <p>Media queries allow CSS to change based on the screen size.</p>
+
+        <!-- VISUAL INDICATOR -->
+        <div class="status-box width-indicator"></div>
+
+        <h2>1. The Concept (Slides 8-10)</h2>
+        <p>
+            Without media queries, a desktop website looks "squished" on a phone. 
+            With media queries, we can tell the browser: 
+            <em>"If the screen is small, stack the boxes vertically instead of horizontally."</em>
+        </p>
+
+        <h2>2. The Syntax (Slide 15)</h2>
+        <p>The standard syntax looks like this:</p>
+        <pre style="background:#eee; padding:10px; border-radius:5px;">
+@media (max-width: 600px) {
+    /* Styles here ONLY apply if screen is 600px or smaller */
+    body {
+        background-color: lightyellow;
+    }
+}
+        </pre>
+
+        <h2>3. Coding Question (Slide 32)</h2>
+        <p><strong>Task:</strong> Change background color to <code>lightyellow</code> when width is 600px or less.</p>
+        <p>
+            <strong>How to test:</strong> If you are on a computer, grab the edge of this window and drag it inward to make it narrow. 
+            Watch the background color of the page change from <strong>Blue</strong> (Desktop) to <strong>Yellow</strong> (Mobile)!
+        </p>
+
+    </div>
+
+</body>
+</html>

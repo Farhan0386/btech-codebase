@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 14: Fixed, Sticky & Z-Index</title>
+
+    <style>
+        /* Global Reset */
+        body {
+            margin: 0; /* Important! Removes default browser spacing */
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* =========================================
+           TOPIC 1: FIXED POSITION (Slides 3-8)
+           Target: Elements that stay in the viewport window (don't scroll).
+           Real World Use: Navbars, Chat buttons, "Back to Top" buttons.
+           ========================================= */
+
+        /* CODING QUESTION SOLUTION (From Slide 6 & 7) */
+        header {
+            /* 1. Stay fixed at the top of the viewport */
+            position: fixed; 
+            top: 0;
+            left: 0;
+            
+            /* 4. Span full width */
+            width: 100%; 
+            height: 79px;
+            
+            /* 2. Styling specs from slide */
+            background-color: #333; 
+            color: white;
+            
+            /* 3. Padding specs */
+            padding: 15px; 
+            
+            /* Important: Z-Index keeps it ON TOP of scrolling content */
+            z-index: 1000;
+            
+            box-shadow: 0 2px 10px rgba(0,0,0,1); /* Optional: Adds a nice shadow */
+        }
+
+        /* IMPORTANT EXAM TIP:
+           Fixed elements are removed from flow. If we don't add padding to the 
+           body or the next container, the top content will hide BEHIND the header.
+        */
+        .content-container {
+            padding-top: 80px; /* Push content down so it's visible below header */
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* =========================================
+           TOPIC 2: STICKY POSITION (Slides 9-12)
+           Target: Acts like relative until you scroll past it, then acts like fixed.
+           Real World Use: Section headers (like "A", "B", "C" in a contact list).
+           ========================================= */
+        .sticky-banner {
+            background-color: #ffeb3b; /* Yellow */
+            padding: 10px;
+            border: 1px solid #fbc02d;
+            font-weight: bold;
+            
+            /* The Magic Command */
+            position: sticky;
+            
+            /* The "Sticking Point". It will stick 60px from top 
+               (60px is to account for the height of our fixed header!) */
+            top: 60px; 
+        }
+
+        /* =========================================
+           TOPIC 3: Z-INDEX (Slides 13-17)
+           Target: Controls the "Stacking Order" (Front vs Back).
+           Rule: Only works on positioned elements (relative, absolute, fixed, sticky).
+           Higher Number = Closer to the user (On Top).
+           ========================================= */
+        
+        /* Coding Question Container (Slide 16) */
+        .z-index-demo {
+            position: relative; /* Creates a playground for absolute children */
+            height: 250px;
+            border: 2px dashed #999;
+            margin-top: 20px;
+            background-color: #ddd;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute; /* Must be positioned for z-index to work */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+        }
+
+        /* From Slide 16 Code: */
+        .box1 {
+            background: red;
+            top: 40px;
+            left: 40px;
+            z-index: 1; /* Lowest number -> At the back */
+        }
+
+        .box2 {
+            background: blue;
+            top: 70px;
+            left: 70px;
+            z-index: 2; /* Middle number -> In the middle */
+        }
+
+        .box3 {
+            background: green;
+            top: 100px;
+            left: 100px;
+            z-index: 3; /* Highest number -> At the front */
+        }
+
+        /* Just some filler text to make the page scrollable */
+        .filler-text {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOPIC 1: FIXED HEADER (Slide 7 Solution) -->
+    <header>
+        <h2>Lecture 14: Fixed Header</h2>
+        <small>I stay here even when you scroll!</small>
+    </header>
+
+    <div class="content-container">
+        <h1>CSS Positioning Part II</h1>
+        <p>Scroll down to see the Sticky and Z-Index examples.</p>
+
+        <!-- TOPIC 2: STICKY POSITION -->
+        <h3>Topic 2: Sticky Position</h3>
+        <p>The yellow box below behaves normally until you scroll past it.</p>
+        
+        <div class="sticky-banner">
+            I AM STICKY! (I stick below the header)
+        </div>
+
+        <p class="filler-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scroll down...<br><br>
+            (We need lots of text here to demonstrate scrolling effects.)<br><br>
+            When you scroll down, the "Fixed Header" stays stuck to the viewport top.<br>
+            The "Sticky Banner" moves up until it hits its `top` value, then it sticks.<br>
+            <br>
+                    </p>
+
+        <!-- TOPIC 3: Z-INDEX -->
+        <h3>Topic 3: Z-Index (Stacking Order)</h3>
+        <p>This is the solution to the coding question on Slide 16.</p>
+        
+        <div class="z-index-demo">
+            <!-- Box 1 (Red) -->
+            <div class="box box1">z-index: 1</div>
+            
+            <!-- Box 2 (Blue) -->
+            <div class="box box2">z-index: 2</div>
+            
+            <!-- Box 3 (Green) -->
+            <div class="box box3">z-index: 3</div>
+        </div>
+        
+        <p><strong>Explanation:</strong> Even though Red is first in code, Green sits on top because it has the highest `z-index`.</p>
+
+        <!-- Extra Scrolling Space -->
+        <div style="height: 800px; background: linear-gradient(#fff, #eee);">
+            <p style="padding: 20px; text-align: center;">Keep scrolling... notice the Header stays?</p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 13: CSS Positioning Prep</title>
+
+    <style>
+        /* =========================================
+           TOPIC 1: STATIC POSITION (Slides 7-8)
+           Default behavior. Elements stack like blocks.
+           ========================================= */
+        .static-box {
+            width: 150px;
+            height: 100px;
+            background-color: lightblue;
+            border: 1px solid blue;
+            
+            /* position: static; is the DEFAULT.
+               Even if we write 'top: 50px', it won't move!
+               Static elements always follow the normal page flow.
+            */
+            position: static;
+        }
+
+        /* =========================================
+           TOPIC 2: RELATIVE POSITION (Slides 9-10)
+           Moves relative to its *original* location.
+           ========================================= */
+        .relative-box {
+            width: 150px;
+            height: 100px;
+            background-color: lightgreen;
+            border: 1px solid green;
+
+            /* 1. It stays in the document flow (takes up space).
+               2. We can nudge it using top/left/right/bottom.
+            */
+            position: relative;
+            top: 20px;  /* Move down 20px from original spot */
+            left: 30px; /* Move right 30px from original spot */
+        }
+
+        /* =========================================
+           TOPIC 3: ABSOLUTE POSITION (Slides 11-12)
+           Removed from flow. Flies over other elements.
+           ========================================= */
+        
+        /* This is the container for the absolute example */
+        .absolute-parent {
+            position: relative; /* CRITICAL: This makes it the "anchor" */
+            width: 300px;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 2px dashed #333;
+            margin-bottom: 20px;
+        }
+
+        .absolute-child {
+            width: 150px;
+            height: 100px;
+            background-color: coral;
+            color: white;
+
+            /* 1. Removed from normal flow (doesn't push other things).
+               2. Positioned relative to nearest ANCESTOR that is NOT static.
+                  (In this case, .absolute-parent).
+            */
+            position: absolute;
+            top: 50px;  /* 50px from the TOP of the PARENT */
+            left: 50px; /* 50px from the LEFT of the PARENT */
+        }
+
+        /* =========================================
+           EXAM CODING QUESTION (Slides 14-15)
+           "Create a container (relative) and inner box (absolute)..."
+           ========================================= */
+        
+        /* The Container (Slide 14 Step 1) */
+        .exam-container {
+            width: 300px;
+            height: 300px;
+            background-color: lightblue;
+            border: 1px solid black;
+            
+            /* Important: Establishes positioning context for the child */
+            position: relative; 
+            margin-top: 20px;
+        }
+
+        /* The Inner Box (Slide 14 Step 2 & 3) */
+        .exam-inner-box {
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            
+            /* Position absolute to move it freely inside the parent */
+            position: absolute;
+            
+            /* Step 3: Position 50px from top and 50px from RIGHT */
+            top: 50px;
+            right: 50px; 
+        }
+
+        /* Layout styling for readability */
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; max-width: 800px; }
+        h2 { border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .note { background: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <h1>Lecture 13: Positioning & Basic Layout</h1>
+    <p>
+        By default, elements stack top-to-bottom. Positioning helps us break this rule 
+        to create layouts like navbars, popups, and card overlays.
+    </p>
+
+    <!-- 1. STATIC -->
+    <h2>1. Static Positioning (Default)</h2>
+    <div class="note">
+        <strong>Rule:</strong> Elements appear one after another. <code>top</code> and <code>left</code> have no effect.
+    </div>
+    <div class="static-box">Box 1 (Static)</div>
+    <div class="static-box">Box 2 (Static)</div>
+    <p>Notice how Box 2 sits directly below Box 1.</p>
+
+    <!-- 2. RELATIVE -->
+    <h2>2. Relative Positioning</h2>
+    <div class="note">
+        <strong>Rule:</strong> Element occupies its original space but is visually shifted.
+    </div>
+    <div class="static-box">I am a static reference box.</div>
+    <div class="relative-box">
+        I am Relative!<br>
+        (Shifted down 20px, right 30px)
+    </div>
+    <div class="static-box">I am another static box.</div>
+    <p>Notice how the "ghost" space of the relative box is still preserved in the flow.</p>
+
+    <!-- 3. ABSOLUTE -->
+    <h2>3. Absolute Positioning</h2>
+    <div class="note">
+        <strong>Rule:</strong> Element is removed from flow. It positions itself relative to the nearest 
+        <strong>positioned</strong> ancestor (anything not static).
+    </div>
+
+    <div class="absolute-parent">
+        <strong>Parent (Relative)</strong>
+        <div class="absolute-child">
+            <strong>Child (Absolute)</strong><br>
+            Top: 50px, Left: 50px
+        </div>
+    </div>
+    
+    <!-- 4. EXAM QUESTION -->
+    <h2>4. Exam Coding Task (Slide 14)</h2>
+    <p><strong>Task:</strong> Create a 300x300 relative container. Put a 100x100 absolute box inside, positioned 50px from Top and Right.</p>
+    
+    <div class="exam-container">
+        <strong>.container</strong> (Relative)
+        
+        <div class="exam-inner-box">
+            <strong>.inner-box</strong><br>
+            (Absolute)
+        </div>
+    </div>
+
+</body>
+</html>

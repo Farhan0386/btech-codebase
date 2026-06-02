@@ -1,0 +1,82 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORMS</title>
+     <style>
+    body {
+      background-image: url("myphoto.jpg");
+      background-repeat: no-repeat;  
+      background-size: cover;         
+      background-position: center;  
+    }
+  </style>
+
+    
+</head>
+<body >
+    <h1>FORMS</h1>
+    <form  >
+        <label for="name">USER NAME :</label>
+        <input type="text" id="name" placeholder="Enter user name" required value="farhan" readonly>
+        <br>
+        <br>
+        <label for="email">E-MAIL :</label>
+        <input type="email" id="email"  placeholder="abc@gmail.com" required>
+        <br>
+        <br>
+        <label for="password">PASSWORD :</label>
+        <input type="password" id="password" minlength="6" maxlength="12" placeholder="6-12 characters">
+        <br>
+        <br>
+        <label for="dob">D.O.B :</label>
+        <input type="date" id="dob">
+        <br>
+        <br>
+        <label for="gender">GENDER <input type="radio" name="gender">MALE</label>
+        <label for="gender"> <input type="radio" name="gender" >FEMALE</label>
+        <label for="gender"> <input type="radio" name="gender" >OTHER</label>
+        <br>
+        <br>
+        <label for="number">MOBILE NUMBER :</label>
+        <input type="tel" id="number" pattern="[6-9][0-9]{9}" placeholder="10 digit mobile number">
+        <br>
+        <br>
+        <label for="file">UPLOAD PHOTO :</label>
+        <input type="file" id="file"  accept="image/*">
+        <br>
+        <label for="colour">CHOOSE COLOUR <input type="color" id="colour"></label>
+        <br>
+         <textarea name="" id="" rows="10" cols="30">this is default value.
+       </textarea>
+
+       <br><br>
+
+       <label for="section">Choose Section :</label>
+       <select name="" id="section">
+
+        <option value="sectionA">Section A</option>
+        <option value="sectionB">Section B</option>
+        <option value="sectionC" selected>Section C</option>
+        <option value="sectionD">Section D</option>
+
+       </select>
+
+       <label>
+                <input type="checkbox" name="check" required> I accept T&C.
+       </label>
+       <br>
+       <br>
+       <input type="submit" value="Submit via input" disabled>
+
+       <button type="submit"> Submit via button </button>
+
+       <input type="reset">
+        
+
+    
+    </form>
+    
+</body>
+</html>

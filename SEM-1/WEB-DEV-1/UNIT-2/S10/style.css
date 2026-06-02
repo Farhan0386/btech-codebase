@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'MyFont'; /* You choose the name */
+  src: url('fonts/myfonts.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
