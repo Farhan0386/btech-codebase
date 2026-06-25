@@ -11,23 +11,24 @@ class Book:
 
     def checkout(self, n):
         if n<=0:
-            raise ValueError("Invalid number of copies")
+            print("Invalid number of copies")
 
         if n>self.__copies:
-            raise ValueError("Not enough copies available")
+            print("Not enough copies available")
         self.__copies-=n
 
     def return_book(self, n):
         if n<=0:
-            raise ValueError("Invalid number of copies")
-        self.__copies+=n
+            print("Invalid number of copies")
+        else:
+            self.__copies+=n
 
 b1=Book("978123456", "Python Basics", "Farhan", 10)
-print("Title:", b1._title)
-print("Available:", b1.available)
+print("Title  :  ", b1._title)
+print("Available  :  ", b1.available)
 print()
 b1.checkout(3)
-print("After checkout:", b1.available)
+print("After checkout  : ", b1.available)
 print()
 b1.return_book(2)
-print("After return:", b1.available)
+print("After return :  ", b1.available)

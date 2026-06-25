@@ -15,8 +15,9 @@ class Student:
     def gpa(self, marks):
         for i in marks:
             if 100<i<0:
-                raise ValueError("Marks must be between 0 and 100")
-        self._marks=marks
+                print("Marks must be between 0 and 100")
+            else:
+                self._marks=marks
 
     @classmethod
     def count(cls):
