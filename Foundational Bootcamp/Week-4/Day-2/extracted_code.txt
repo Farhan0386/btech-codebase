@@ -1,0 +1,299 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_style("darkgrid")
+plt.figure(figsize=(12,10))
+plt.imshow(plt.imread("../input/logistic-reg/Capture.PNG"))
+
+plt.figure(figsize=(12,10))
+plt.imshow(plt.imread("../input/logodss/Capture.PNG"))
+
+# Calculate odds_of_rain
+odds_of_rain = .4/.6
+print('odds of rain: ', odds_of_rain)
+
+# Calculate log_odds_of_rain
+log_odds_of_rain = np.log(.4/.6)
+print('log odds of rain: ', log_odds_of_rain)
+
+odds_on_time = 0.9/0.1
+print("odds of time: ", odds_on_time)
+
+log_odds_on_time = np.log(odds_on_time)
+print("log odds of rain: ",log_odds_on_time )
+
+plt.figure(figsize=(12,10))
+plt.imshow(plt.imread("../input/sigmoud-ffun/Capture.PNG"))
+
+x= 3.28
+np.exp(x)/(np.exp(x)+1)
+
+def calculate_sigmoid(log_odds):
+    return np.exp(log_odds)/(np.exp(log_odds)+1)
+
+print(calculate_sigmoid(log_odds_of_rain))
+print(calculate_sigmoid(log_odds_on_time))
+
+df = pd.read_csv("../input/heart-disease-prediction-using-logistic-regression/framingham.csv")
+df.head()
+
+df.info()# all values are numerical
+
+df.describe(include="all").transpose()
+
+df.corr()["TenYearCHD"].sort_values(ascending=False)
+#Here we can see the correlations between features and hearth disease
+
+#Lets visualize overall correlations between all columns with each other
+plt.figure(figsize=(25,20))
+mask = np.zeros_like(df.corr(), dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+sns.heatmap(df.corr(),cmap="jet",annot=True,linewidths=0, linecolor='white',cbar=True,mask=mask)
+
+labels = 'Heart Disease', 'Healthy'
+sizes = [df.TenYearCHD[df["TenYearCHD"]==1].count(), df.TenYearCHD[df["TenYearCHD"]==0].count()]
+explode = (0, 0.1)
+fig1, ax1 = plt.subplots(figsize=(10, 8))
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+ax1.axis('equal')
+plt.title("Proportion of Heart Disease and Healthy", size = 20)
+plt.show()
+
+plt.figure(figsize=(15,10))
+sns.countplot(x="male",hue="TenYearCHD", data=df, palette="Set1")
+plt.title("The Counts of Hearth Disease by Male")
+plt.legend()
+
+plt.figure(figsize=(15,10))
+sns.countplot(x="prevalentHyp", hue="TenYearCHD", data=df,palette="Set2")
+plt.title("The Counts of Hearth Disease by systolic blood pressure ")
+
+import plotly.graph_objects as go
+labels = df['education'].unique()
+values = df['education'].value_counts()
+
+fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
+fig.update_layout(title_text="<b>Education</b>")
+fig.show()
+
+sns.set_style("darkgrid")
+sns.kdeplot(x="diaBP",data=df,palette="Set2",hue="TenYearCHD",shade=True)
+sns.set(rc={'figure.figsize':(20,12)})
+plt.ylabel('Density');
+plt.xlabel('Diastolic blood pressure');
+plt.title('Distribution of  diastolic blood pressure by Heart Disease')
+
+sns.set_style("darkgrid")
+sns.kdeplot(x="sysBP",data=df,palette="Set2",hue="TenYearCHD",shade=True)
+sns.set(rc={'figure.figsize':(20,12)})
+plt.ylabel('Density');
+plt.xlabel('Systolic blood pressure ');
+plt.title('Distribution of  systolic blood pressure  by Heart Disease')
+
+df.isnull().sum().sort_values(ascending=False)
+
+missing_columns = ["glucose", "education","BPMeds","totChol","cigsPerDay","BMI","heartRate"]
+for i in missing_columns:
+    print("Column :", i)
+    print(df[i].nunique())
+    print("******************************")
+
+df["glucose"].fillna(df["glucose"].mean(),inplace =True)
+df["totChol"].fillna(df["totChol"].mean(),inplace=True)
+df["cigsPerDay"].fillna(df["cigsPerDay"].mean(),inplace=True)
+df["BMI"].fillna(df["BMI"].mean(),inplace=True)
+df["heartRate"].fillna(df["heartRate"].mean(),inplace=True)
+df["education"].fillna(df["education"].median(),inplace=True)
+df["BPMeds"].fillna(df["BPMeds"].median(),inplace=True)
+
+df.isnull().sum().sort_values(ascending=False)
+
+from sklearn.preprocessing import StandardScaler
+ss = StandardScaler()
+df[["cigsPerDay","totChol","sysBP","diaBP","BMI","heartRate","glucose","age"]]= ss.fit_transform(df[["cigsPerDay","totChol","sysBP","diaBP","BMI","heartRate","glucose","age"]])
+df.head(3)
+
+X = df.drop("TenYearCHD",axis=1)
+y = df["TenYearCHD"]
+print(X.columns)
+print(y)
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42)
+print(X_train.shape)
+print(X_test.shape)
+print(y_train.shape)
+print(y_test.shape)
+
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X_train, y_train)
+print(model.coef_)
+print(model.intercept_)
+
+
+predictions = model.predict(X_test)
+
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test, predictions))
+print(accuracy_score(y_test, predictions))
+
+from sklearn.ensemble import RandomForestClassifier
+forest = RandomForestClassifier()
+forest.fit(X_train, y_train)
+predictions2 = forest.predict(X_test)
+print(confusion_matrix(y_test,predictions2))
+print(classification_report(y_test, predictions2))
+print(accuracy_score(y_test, predictions2))
+
+#Choosing best hyperparameters:
+# Number of trees in random forest
+n_estimators = [int(x) for x in np.linspace(start = 100, stop = 1200, num = 12)]
+# Number of features to consider at every split
+max_features = ['auto', 'sqrt']
+# Maximum number of levels in tree
+max_depth = [int(x) for x in np.linspace(5, 30, num = 6)]
+# max_depth.append(None)
+# Minimum number of samples required to split a node
+min_samples_split = [2, 5, 10, 15, 100]
+# Minimum number of samples required at each leaf node
+min_samples_leaf = [1, 2, 5, 10]
+
+# Create the random grid for these hyperparameters:
+random_grid = {'n_estimators': n_estimators,
+               'max_features': max_features,
+               'max_depth': max_depth,
+               'min_samples_split': min_samples_split,
+               'min_samples_leaf': min_samples_leaf}
+
+print(random_grid)
+
+from sklearn.model_selection import RandomizedSearchCV
+forest = RandomForestClassifier()
+random_grid = RandomizedSearchCV(estimator = forest, param_distributions = random_grid, n_iter = 10, cv = 5, verbose=2, random_state=42, n_jobs = 1)
+
+random_grid.fit(X_train,y_train)
+
+print(random_grid.best_params_)
+print(random_grid.best_score_)
+
+predictions3 = random_grid.predict(X_test)
+
+
+print(confusion_matrix(y_test,predictions3))
+print(classification_report(y_test, predictions3))
+print(accuracy_score(y_test, predictions3))
+
+from sklearn.neighbors import KNeighborsClassifier
+error_rate=list()
+#here we iterate meny different k values and plot their error rates 
+#and discover which one is better than others and has the lowest error rate
+for i in range(1,40):
+    knn=KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train,y_train)
+    prediction_i=knn.predict(X_test)
+    error_rate.append(np.mean(prediction_i != y_test))
+
+# Now we will plot the prediction error rates of different k values
+plt.figure(figsize=(15,10))
+plt.plot(range(1,40),error_rate, color="blue", linestyle="--",marker="o",markerfacecolor="red",markersize=10)
+plt.title("Error Rate vs K Value")
+plt.xlabel="K Value"
+plt.ylabel("Error Rate")
+
+knn=KNeighborsClassifier(n_neighbors=27)
+knn.fit(X_train, y_train)
+predictions4=knn.predict(X_test)
+print(confusion_matrix(y_test,predictions4))
+print(classification_report(y_test, predictions4))
+print(accuracy_score(y_test, predictions4))
+
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+param_grid={"C":[1,2,3,4,5,10,100],"gamma":[1,0.1,0.2,0.5,0.01,0.001,0.0001]} 
+#here we select values for grid search to try
+grid=GridSearchCV(SVC(),param_grid,verbose=2)
+grid.fit(X_train,y_train)
+
+print(grid.best_params_)
+print(grid.best_estimator_)
+
+grid_predictions=grid.predict(X_test)
+print(confusion_matrix(y_test,grid_predictions))
+print(classification_report(y_test, grid_predictions))
+print(accuracy_score(y_test, grid_predictions))
+
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.ensemble import VotingClassifier
+clf1 = KNeighborsClassifier(n_neighbors=27)
+clf2 = RandomForestClassifier(n_estimators= 700, min_samples_split = 15, min_samples_leaf = 1,max_features= 'auto',max_depth = 20)
+clf3 = AdaBoostClassifier()
+eclf1 = VotingClassifier(estimators=[('knc', clf1), ('rfc', clf2), ('abc', clf3)], voting='soft')
+eclf1.fit(X_train, y_train)
+predictions = eclf1.predict(X_test)
+print("Final Accuracy Score ")
+print(confusion_matrix(y_test,grid_predictions))
+print(classification_report(y_test, grid_predictions))
+print(accuracy_score(y_test, grid_predictions))
+
+clf1 = GradientBoostingClassifier()
+clf2 = LogisticRegression()
+clf3 = AdaBoostClassifier()
+eclf1 = VotingClassifier(estimators=[('gbc', clf1), ('lr', clf2), ('abc', clf3)], voting='soft')
+eclf1.fit(X_train, y_train)
+predictions = eclf1.predict(X_test)
+print("Final Accuracy Score ")
+print(accuracy_score(y_test, predictions))
+print(confusion_matrix(y_test,grid_predictions))
+print(classification_report(y_test, grid_predictions))
+
+import xgboost
+from sklearn.metrics import log_loss
+xgb = xgboost.XGBClassifier(learning_rate=0.1,
+                                max_depth=20,
+                                min_child_weight=30,
+                                n_estimators=20)
+xgb.fit(X_train, y_train)
+eval_set=[(X_test, y_test)]
+predictions = xgb.predict(X_test)
+print(log_loss(y_test, predictions))
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test, predictions))
+print(accuracy_score(y_test, predictions))
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.regularizers import l2
+ann = Sequential()
+ann.add(Dense(units = 50,activation="relu", kernel_regularizer=l2(0.001)))
+ann.add(Dropout(0.2))
+ann.add(Dense(units = 100, activation="relu",kernel_regularizer=l2(0.001)))
+ann.add(Dropout(0.2))
+ann.add(Dense(units = 200, activation="relu",kernel_regularizer=l2(0.001)))
+ann.add(Dense(1,activation="sigmoid")) 
+
+ann.compile(optimizer = "adam", loss="binary_crossentropy",metrics=["accuracy"])
+callback=EarlyStopping(monitor="val_loss", patience=2)
+history = ann.fit(x = X_train, y= y_train, validation_data=(X_test,y_test), batch_size=16, epochs=25,callbacks=[callback])
