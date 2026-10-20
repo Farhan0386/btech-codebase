@@ -1,0 +1,11 @@
+id,name,age,city,score,passed
+1,Aisha,20,Delhi,88,True
+2,Rohan,21,Mumbai,76,True
+3,Meera,19,Bengaluru,92,True
+4,Arjun,22,Chennai,64,True
+5,Farah,20,Hyderabad,48,False
+6,Kabir,23,Pune,55,True
+7,Sana,21,Kolkata,39,False
+8,Vikram,22,Jaipur,81,True
+9,Neha,20,Ahmedabad,70,True
+10,Aditya,19,Lucknow,33,False
