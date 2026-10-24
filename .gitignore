@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+**/node_modules/
+.pnp/
+.pnp.*
+
+# JavaScript build and test output
+dist/
+**/dist/
+build/
+**/build/
+coverage/
+**/coverage/
+*.tsbuildinfo
+
+# Python generated files and environments
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+**/.venv/
+venv/
+**/venv/
+env/
+**/env/
+.pytest_cache/
+**/.pytest_cache/
+.mypy_cache/
+**/.mypy_cache/
+.ruff_cache/
+**/.ruff_cache/
+*.egg-info/
+
+# Logs and temporary files
+*.log
+logs/
+**/logs/
+*.tmp
+*.temp
+*.swp
+*~
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# IDE and operating-system files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.user
+*.userossc
+*.sln.docstates
+
