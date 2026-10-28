@@ -1,0 +1,106 @@
+DBMS UNIT 3: TRANSACTIONS
+================================
+
+1. What is a Transaction?
+--------------------------------
+A transaction is a sequence of database operations that is treated as one
+logical unit of work. A transaction may contain operations such as INSERT,
+UPDATE, DELETE, and SELECT.
+
+A transaction must be completed completely or not performed at all. If all
+operations are successful, the transaction is committed. If an error occurs,
+the transaction is rolled back and the database is restored to its previous
+consistent state.
+
+Example: Transferring money from Account A to Account B:
+    1. Debit the amount from Account A.
+    2. Credit the amount to Account B.
+
+Both operations must succeed. If either operation fails, the debit must also
+be undone.
+
+2. ACID Properties
+-------------------------
+ACID properties ensure reliable and consistent transaction processing.
+
+A - Atomicity
+    A transaction is an indivisible unit. Either all of its operations are
+    completed, or none of them take effect.
+
+    Example: In a bank transfer, money must not be debited from Account A
+    without being credited to Account B.
+
+C - Consistency
+    A transaction changes the database from one valid state to another valid
+    state. All integrity constraints must remain satisfied after the
+    transaction.
+
+    Examples of constraints include:
+    - Primary-key and unique-key constraints
+    - Foreign-key constraints
+    - NOT NULL constraints
+    - CHECK constraints
+    - Balance and other business rules
+
+I - Isolation
+    Concurrent transactions should not interfere with one another. Each
+    transaction should behave as if it were running independently, even when
+    several transactions execute at the same time.
+
+D - Durability
+    Once a transaction is committed, its changes are permanently stored.
+    The changes must not be lost because of a system crash or power failure.
+
+3. Transaction States
+-------------------------
+The common states of a transaction are:
+
+1. Active
+   The transaction is currently executing its operations.
+
+2. Partially Committed
+   The final operation has been executed, but the changes have not yet been
+   permanently recorded.
+
+3. Committed
+   The transaction has completed successfully, and all changes are permanent.
+
+4. Failed
+   The transaction cannot continue because of an error, system failure, or
+   violation of a constraint.
+
+5. Aborted
+   The transaction has been rolled back, so its changes have been undone.
+   An aborted transaction may be restarted or terminated.
+
+4. Transaction Control Commands
+--------------------------------
+COMMIT
+    Permanently saves all changes made by the current transaction.
+
+ROLLBACK
+    Undoes changes made by the current transaction since its beginning or
+    since the last SAVEPOINT.
+
+SAVEPOINT
+    Creates a point within a transaction to which the transaction can be
+    partially rolled back.
+
+Example:
+    START TRANSACTION;
+    UPDATE accounts SET balance = balance - 500 WHERE account_id = 1;
+    UPDATE accounts SET balance = balance + 500 WHERE account_id = 2;
+    COMMIT;
+
+If an error occurs before COMMIT, use:
+    ROLLBACK;
+
+5. Importance of Transactions
+-----------------------------
+Transactions help to:
+    - Maintain database consistency.
+    - Protect data during system failures.
+    - Support multiple users working at the same time.
+    - Prevent incomplete updates.
+    - Enforce integrity constraints.
+    - Recover safely from errors.
